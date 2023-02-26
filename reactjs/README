@@ -1,0 +1,112 @@
+NPM         //npm does not stand for Node.js Package Manager. It is, however, the package manager for Node.js.
+            //npm allows you to bring in code from the npm registry which is a bunch of open source modules that people have written so you can use them in your project.
+npm init -y        //Please install Node.js if you don't have.
+
+npm install -D prettier@2.7.1           //install prettier in development only.
+
+npm install -D eslint@8.24.0 eslint-config-prettier@8.5.0           //install eslint in development only.
+
+Let's create an .eslintrc.json file to start linting our project.
+{
+  "extends": ["eslint:recommended", "prettier"],
+  "plugins": [],
+  "parserOptions": {
+    "ecmaVersion": 2022,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  }
+}
+
+"lint": "eslint \"src/**/*.{js,jsx}\" --quiet",         //Add this into the script in package.json
+"format": "prettier --write \"src/**/*.{js,jsx}\""
+
+//Create a .gitignore file
+node_modules
+dist/
+.env
+.DS_Store
+coverage/
+.vscode/
+
+
+npm install -D vite@3.1.4 @vitejs/plugin-react@2.1.0            //install anything we need from vite.
+
+
+//Create a file vite.config.js
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+
+export default defineConfig({
+  plugins: [react()],
+  root: "src",
+});
+
+
+npm install react@18.2.0 react-dom@18.2.0       //Install react to the project.
+
+
+//Set up our scripts to start Vite. In package.json, put:
+"dev": "vite",
+"build": "vite build",
+"preview": "vite preview"
+
+
+npm install -D eslint-plugin-import@2.26.0 eslint-plugin-jsx-a11y@6.6.1 eslint-plugin-react@7.31.8          //ESLINT + React
+
+//Update your .eslintrc.json to:
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "react/prop-types": 0,
+    "react/react-in-jsx-scope": 0
+  },
+  "plugins": ["react", "import", "jsx-a11y"],
+  "parserOptions": {
+    "ecmaVersion": 2022,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx"]
+      }
+    }
+  }
+  }
+
+
+  Let's add the ESLint rule. Run npm install -D eslint-plugin-react-hooks@4.6.0. Add this to ESLint:
+  {
+    "extends": [
+      …
+      "plugin:react-hooks/recommended",
+      …
+    ]
+  }
+
+  To install react router
+  npm install react-router-dom@6.4.1
